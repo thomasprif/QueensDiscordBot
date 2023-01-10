@@ -1,5 +1,5 @@
 node_modules
 config.json
-.eslintrn.json
+.eslintrnc.json
 commands/ping.js
 commands/button.js
