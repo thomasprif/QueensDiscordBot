@@ -1,0 +1,56 @@
+{
+    "name": "Electrical Engineering",
+
+    "common core courses": {
+        "APSC 200" : ["Engineering Design & Practice II", "F"],
+        "APSC 293" : ["Engineering Communications", "F"],
+        "MTHE 212" : ["Linear Algebra", "F"],
+        "MTHE 217" : ["Algebraic Structures", "F"],
+        "MTHE 237" : ["Differential Equations for Engineering Science", "F"],
+        "MTHE 280" : ["Relativity And Quanta", "F"],
+        "MTHE 281" : ["Introduction to Real Analysis", "F"]
+    },
+
+    "sub-plans": {
+        "ENP1": {
+            "name" : "Applied Mechanics",
+            "courses" : {
+                "MECH 221" : ["Solid Mechanics I", "F"],
+                "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "F"],
+                "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
+                "MREN 241" : ["Fluid Mechanics and Fluid Power", "F"],
+                "ENPH 225" : ["Mechanics", "F"]
+            } 
+        },
+        "ENP2": {
+            "name" : "Computing and Communications",
+            "courses" : {
+                "CMPE 212" : ["Introduction to Computing Science II", "F"],
+                "ELEC 271" : ["Digital Systems", "F"],
+                "ELEC 274" : ["Computer Architecture", "F"],
+                "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
+                "ENPH 239" : ["Eng. Electricity & Magnestism", "F"]
+            }
+        },
+        "ENP3": {
+            "name" : "Mechanical",
+            "courses" : {
+                "ENPH 225" : ["Mechanics", "F"],
+                "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
+                "MECH 241" : ["Fluid Mechanics I", "F"]
+            }
+        },
+        "ENP4": {
+            "name" : "Computing",
+            "courses" : {
+                "CMPE 212" : ["Introduction to Computing Science II", "F"],
+                "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
+                "ENPH 225" : ["Mechanics", "F"]
+            }
+        }
+    },
+
+    "choices": [
+
+    ]
+}

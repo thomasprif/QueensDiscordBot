@@ -21,12 +21,10 @@
 		"no-console": "off",
 		"no-empty-function": "error",
 		"no-floating-decimal": "error",
-		"no-inline-comments": "error",
 		"no-lonely-if": "error",
 		"no-multi-spaces": "error",
 		"no-shadow": ["error", { "allow": ["err", "resolve", "reject"] }],
 		"no-var": "error",
-		"object-curly-spacing": ["error", "always"],
 		"prefer-const": "error",
 		"semi": ["error", "always"],
 		"space-before-function-paren": ["error", {

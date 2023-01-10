@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
-const { getDisciplines } = require("../tools.js")
+const { getDisciplines } = require("../tools.js");
 const path = require("node:path");
 const fs = require("node:fs");
 

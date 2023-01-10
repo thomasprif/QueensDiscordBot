@@ -5,11 +5,10 @@
         "APSC 200" : ["Engineering Design & Practice II", "F"],
         "APSC 293" : ["Engineering Communications", "F"],
         "APSC 221" : ["Economic And Business Practice", "F"],
-        "CIVL 200" : ["Professional Skills I", "F"],
-        "CIVL 210" : ["Chemistry For Civil Engineers", "F"],
+        "CHEE 209" : ["Analysis Of Process Data", "F"],
+        "CIVL 230" : ["Solid Mechanics I", "F"],
         "CIVL 215" : ["Materials For Civil Engineers", "F"],
         "CIVL 222" : ["Numerical Methods", "F"],
-        "CIVL 230" : ["Solid Mechanics I", "F"],
         "CIVL 231" : ["Solid Mechanics II", "F"],
         "CIVL 250" : ["Hydraulics I", "F"],
         "MTHE 224" : ["Applied Math For Civil Eng.", "F"]
