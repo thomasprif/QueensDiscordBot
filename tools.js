@@ -1,3 +1,5 @@
+const path = require("node:path");
+const fs = require("node:fs");
 module.exports = {
 
     // Takes disicpline JSON file and finds all courses, retruns list of every course + Description 
@@ -26,4 +28,15 @@ module.exports = {
         return allCourses;
 
     },
+
+    getDisciplines: function() {
+        const disciplineDataPath = path.join(__dirname, "disciplineData");
+        return fs.readdirSync(disciplineDataPath)
+                              .filter(file => file.endsWith(".json"))
+                              .map(file => {
+                                  const filePath = path.join(disciplineDataPath, file);
+                                  return require(filePath);
+                              });
+
+    }
 };

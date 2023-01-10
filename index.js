@@ -1,5 +1,7 @@
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
+const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { token } = require("./config.json");
+const { getDisciplines } = require("./tools.js")
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -29,9 +31,6 @@ client.once(Events.ClientReady, c => {
 
 // Comand Events
 client.on(Events.InteractionCreate, async interaction => {
-    if(interaction.isButton()) { // Handle button presses
-		await interaction.reply({ content: 'click!', ephemeral: true});
-    }
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
@@ -51,11 +50,40 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 // Button Event
-client.on(Events.InteractionCreate, interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isButton()) return;
+    const discipline = [{name: "Not Sure", 'sub-plans': {}}, ...getDisciplines()].filter(discipline => {
+        return discipline["name"] == interaction.customId;
+    })[0];
+    if (discipline){
+        // Discipline button
+        if (Object.keys(discipline["sub-plans"]).length == 0) {
+            // No subdisciplines
+	        await interaction.reply({ content: `Added to ${discipline["name"]}`, ephemeral: true});
+        } else {
+            // Subdisciplines
+            const subDisciplines = Object.keys(discipline["sub-plans"]).map(key => discipline["sub-plans"][key]);
+            const row = new ActionRowBuilder()
+                  .addComponents(
+                      ...subDisciplines.map(disc => disc["name"]).map(name => {
+                          return new ButtonBuilder()
+                              .setCustomId(name)
+                              .setLabel(name)
+                              .setStyle(ButtonStyle.Primary);
+                      }),
+                  );
 
-    
+            const embed = new EmbedBuilder()
+                  .setColor(0x0099FF)
+                  .setTitle(`Choose Your ${discipline["name"]} Sub-Discipline!`);
 
+            await interaction.reply({ content: "", embeds: [embed], components: [row], ephemeral: true });
+        }
+    } else {
+        // Subdiscipline button
+	    await interaction.reply({ content: `Added to ${interaction.customId}`, ephemeral: true});
+
+    }
 });
 
 

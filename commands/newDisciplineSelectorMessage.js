@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
-
+const { getDisciplines } = require("../tools.js")
 const path = require("node:path");
 const fs = require("node:fs");
 
@@ -11,17 +11,11 @@ module.exports = {
         .setDescription("Creates a new message for users to select diciplines")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
-        const disciplineDataPath = path.join(__dirname, "..", "disciplineData");
-        const disciplines = fs.readdirSync(disciplineDataPath)
-                              .filter(file => file.endsWith(".json"))
-                              .map(file => {
-                                  const filePath = path.join(disciplineDataPath, file);
-                                  return require(filePath)["name"];
-                              });
+        const disciplines = getDisciplines().map(discipline => discipline["name"]);
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
-                    .setCustomId("primary")
+                    .setCustomId("Not Sure")
                     .setLabel("Not Sure")
                     .setStyle(ButtonStyle.Primary),
                 ...disciplines.map(name => {
