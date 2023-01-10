@@ -1,0 +1,21 @@
+{
+    "name" : "Civil Engineering",
+
+    "common core courses": {
+        "APSC 200" : "Engineering Design & Practice II",
+        "APSC 293" : "Engineering Communications",
+        "APSC 221" : "Economic And Business Practice",
+        "CIVL 200" : "Professional Skills I",
+        "CIVL 210" : "Chemistry For Civil Engineers",
+        "CIVL 215" : "Materials For Civil Engineers",
+        "CIVL 222" : "Numerical Methods",
+        "CIVL 230" : "Solid Mechanics I",
+        "CIVL 231" : "Solid Mechanics II",
+        "CIVL 250" : "Hydraulics I",
+        "MTHE 224" : "Applied Math For Civil Eng."
+    },
+
+    "sub-plans": {
+
+    }
+}

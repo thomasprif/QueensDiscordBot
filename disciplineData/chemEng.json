@@ -1,0 +1,34 @@
+{
+    "name": "Chemical Engineering",
+
+    "common core courses": {
+        "CHEE 209" : "Analysis Of Process Data",
+        "CHEE 221" : "Chemical Processes And Systems",
+        "ENCH 211" : "Main Group Chemistry",
+        "ENCH 212" : "Princip Of Chem Reacticity",
+        "MTHE 225" : "Ordinary Differential Equations",
+        "APSC 200" : "Engineering Design & Practice II",
+        "APSC 293" : "Engineering Communications",
+        "CHEE 210" : "Thermodynamics of Energy Conversion Systems",
+        "CHEE 218" : "Laboratory Projects I",
+        "CHEE 222" : "Process Dynamics & Num Methods",
+        "CHEE 223" : "Fluid Mechanics",
+        "ENCH 245" : "Applired Organic Chemistry I"
+    },
+
+    "sub-plans": {
+        "CHE1": {
+            "name" : "Chemical Processing",
+            "courses" : {
+                "CHEE 224" : "Transport Phenomena Fundamentals"
+            } 
+        },
+        "CHE2": {
+            "name" : "Bioengineering",
+            "courses" : {
+                "CHEE 229" : "Cell Based Engineering Princip"
+            }
+        }
+    }
+
+}
