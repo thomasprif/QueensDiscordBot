@@ -38,5 +38,5 @@ module.exports = {
                                   return require(filePath);
                               });
 
-    }
+    },
 };
