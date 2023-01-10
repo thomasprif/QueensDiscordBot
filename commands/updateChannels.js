@@ -1,6 +1,7 @@
 /* eslint-disable no-inner-declarations */
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require("discord.js");
 const path = require("node:path");
+const tools = require(path.join("..", "tools.js"));
 const fs = require("node:fs");
 
 function getChannelName(channel){
@@ -28,6 +29,8 @@ module.exports = {
             const filePath = path.join(disciplineDataPath, file);
             const discipline = require(filePath);
 
+            const courses = tools.getCourses(discipline);
+
             function updateClassChannel(course, topic){
                 course = course.toLowerCase().replace(' ', '-');
                 if(!(channels.includes(course))){
@@ -39,24 +42,12 @@ module.exports = {
                 }
             }
 
-            for(const course in discipline["common core courses"]){
-                const topic = discipline["common core courses"][course];
-                updateClassChannel(course, topic);
+            for(const course of courses){
+                updateClassChannel(course[0], course[1]);
             }
-            
-            for(const subPlan in discipline["sub-plans"]){
-                const courses = Object.keys(discipline["sub-plans"][subPlan]["courses"]);
-                for(const course of courses){
-                    const topic = discipline["sub-plans"][subPlan]["courses"][course];
-                    updateClassChannel(course, topic);
-                }
-            }
-            for(const choice of discipline["choices"]){
-                for(const course in choice){
-                    const topic = discipline["choices"][course];
-                    updateClassChannel(course, topic);
-                }
-            }
+
+
+
 
         }
 
