@@ -46,9 +46,6 @@ module.exports = {
                 updateClassChannel(course[0], course[1]);
             }
 
-
-
-
         }
 
         await interaction.reply("Created Channel");
