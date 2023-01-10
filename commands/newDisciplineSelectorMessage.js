@@ -25,7 +25,6 @@ module.exports = {
                     .setLabel("Not Sure")
                     .setStyle(ButtonStyle.Primary),
                 ...disciplines.map(name => {
-                    console.log(name);
                     return new ButtonBuilder()
                         .setCustomId(name)
                         .setLabel(name)
