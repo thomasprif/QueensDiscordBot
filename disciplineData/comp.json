@@ -1,0 +1,41 @@
+{
+    "name": "Chemical Engineering",
+
+    "common core courses": {
+        "APSC 200" : "Engineering Design & Practice II",
+        "APSC 293" : "Engineering Communications",
+        "ELEC 221" : "Electric Circuits",
+        "ELEC 252" : "Electronics I",
+        "ELEC 270" : "Discrete Mathematics with Computer Engineering App",
+        "ELEC 271" : "Digital Systems",
+        "ELEC 274" : "Computer Architecture",
+        "ELEC 278" : "Fundamentals Of Information Structures",
+        "ELEC 279" : "Introduction to Object Oriented Programming",
+        "ELEC 280" : "Fundamentals of Electromagnets",
+        "ELEC 299" : "Mechatronics Project"
+
+    },
+
+    "sub-plans": {
+        "ECEi": {
+            "name" : "ECEi",
+            "courses" : {
+                "COMM 201" : "Introduction to Business for Entrepreneurs"
+            } 
+        },
+        "Reg": {
+            "name" : "Regular",
+            "courses" : {
+            }
+        }
+    },
+
+    "choices": [
+        {
+            "MTHE 225" : "Ordinary Differential Equations",
+            "MTHE 237" : "Differential Equations for Engineering Science"
+        }
+    ]
+
+
+}

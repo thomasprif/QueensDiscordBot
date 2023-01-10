@@ -13,7 +13,7 @@
         "CHEE 218" : "Laboratory Projects I",
         "CHEE 222" : "Process Dynamics & Num Methods",
         "CHEE 223" : "Fluid Mechanics",
-        "ENCH 245" : "Applired Organic Chemistry I"
+        "ENCH 245" : "Applied Organic Chemistry I"
     },
 
     "sub-plans": {
@@ -29,6 +29,10 @@
                 "CHEE 229" : "Cell Based Engineering Princip"
             }
         }
-    }
+    },
+
+    "choices": [
+
+    ]
 
 }
