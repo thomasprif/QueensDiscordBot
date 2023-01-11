@@ -2,7 +2,7 @@
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { token } = require("./config.json");
-const { getDisciplines } = require("./tools.js");
+const { getDisciplines, addRole } = require("./tools.js");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -58,6 +58,7 @@ client.on(Events.InteractionCreate, async interaction => {
     })[0];
     if (discipline){
         // Discipline button
+        await addRole(interaction.guild, interaction.member, interaction.customId); // Add discipline role to user
         if (Object.keys(discipline["sub-plans"]).length == 0) {
             // No subdisciplines
            await interaction.reply({ content: `Added to ${discipline["name"]}`, ephemeral: true});
@@ -82,7 +83,8 @@ client.on(Events.InteractionCreate, async interaction => {
         }
     } else {
         // Subdiscipline button
-       await interaction.reply({ content: `Added to ${interaction.customId}`, ephemeral: true});
+        await interaction.reply({ content: `Added to ${interaction.customId}`, ephemeral: true});
+        await addRole(interaction.guild, interaction.member, interaction.customId); // Add discipline role to user
 
     }
 });

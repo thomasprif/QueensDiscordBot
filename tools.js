@@ -31,12 +31,31 @@ module.exports = {
 
     getDisciplines: function() {
         const disciplineDataPath = path.join(__dirname, "disciplineData");
-        return fs.readdirSync(disciplineDataPath)
-                              .filter(file => file.endsWith(".json"))
-                              .map(file => {
+        return fs.readdirSync(disciplineDataPath) // Get all the files in the disciplineData dir
+                              .filter(file => file.endsWith(".json")) // Filter for the json ones
+                              .map(file => { // Map json file to the object because it's imported
                                   const filePath = path.join(disciplineDataPath, file);
                                   return require(filePath);
                               });
 
     },
+
+    addRole: async function(guild, guildMember, roleName) {
+        // Get role and create if it doesn't exist
+        let roles = (await guild.roles.fetch()).filter(role => {
+            return role["name"] == roleName;
+        });
+        let role;
+        if (roles.size == 0) { // Role doesn't exist
+            role = await guild.roles.create({
+                name: roleName,
+                color: 'BLUE',
+                reason: 'New role needed',
+            });
+        } else { // Role exists
+            role = roles.first();
+        }
+        // Assign role to user
+        await guildMember.roles.add(role.id, 'add role to user');
+    }
 };
