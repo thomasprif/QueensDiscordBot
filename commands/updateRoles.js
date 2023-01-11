@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const { getDiscplineRoles, getDisciplines, addRole } = require("../tools");
+const { getDiscplineRoles, getDisciplines, addRole, getCourses } = require("../tools");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -21,7 +21,17 @@ module.exports = {
 
                 addRole(guild, r[0], colour);
             }
+
+            const courses = getCourses(d);
+
+            
+
+
         }
+
+
+
+
 
 
         await interaction.reply("Roles created");

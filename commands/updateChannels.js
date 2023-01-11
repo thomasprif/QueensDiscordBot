@@ -23,33 +23,40 @@ module.exports = {
             
         const disciplines = getDisciplines();
 
+        function updateClassChannel(course, topic){
+            course = course.toLowerCase().replace(' ', '-');
+            if(!(channels.includes(course))){
+                guild.channels.create({
+                    name: course,
+                    type: ChannelType.GuildText,
+                    topic: topic,
+                    permissionOverwrites: [
+                        {
+                            id: guild.id,
+                            deny: [PermissionsBitField.Flags.ViewChannel],
+                        },
+                    ],
+                });
+                channels.push(course);
+            }
+        }
+
+        function updateClassChannelPermisions(){
+            
+        }
+
+
         for(const discipline of disciplines){
 
             const courses = tools.getCourses(discipline);
 
-            function updateClassChannel(course, topic){
-                course = course.toLowerCase().replace(' ', '-');
-                if(!(channels.includes(course))){
-                    guild.channels.create({
-                        name: course,
-                        type: ChannelType.GuildText,
-                        topic: topic,
-                        permissionOverwrites: [
-                            {
-                                id: guild.id,
-                                deny: [PermissionsBitField.Flags.ViewChannel],
-                            },
-                        ],
-                    });
-                    channels.push(course);
-                }
-            }
-
             for(const course of courses){
                 updateClassChannel(course[0], course[1]);
+
             }
 
-        }
+
+            }
 
         await interaction.reply("Created Channel");
     },
