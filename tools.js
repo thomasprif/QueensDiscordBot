@@ -8,20 +8,20 @@ module.exports = {
         const allCourses = [];
 
         for(const course in discipline["common core courses"]){
-            const topic = discipline["common core courses"][course];
+            const topic = discipline["common core courses"][course][0];
             allCourses.push([course, topic]);
         }
         
         for(const subPlan in discipline["sub-plans"]){
             const courses = Object.keys(discipline["sub-plans"][subPlan]["courses"]);
             for(const course of courses){
-                const topic = discipline["sub-plans"][subPlan]["courses"][course];
+                const topic = discipline["sub-plans"][subPlan]["courses"][course][0];
                 allCourses.push([course, topic]);
             }
         }
         for(const choice of discipline["choices"]){
             for(const course in choice){
-                const topic = choice[course];
+                const topic = choice[course][0];
                 allCourses.push([course, topic]);
             }
         }

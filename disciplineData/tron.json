@@ -1,0 +1,26 @@
+{
+    "name" : "Mechatronics Robotics Engineering",
+
+    "common core courses": {
+        "MREN 203" : ["Mechatronics Design II", "F"],
+        "MREN 223" : ["Signals and Systems", "F"],
+        "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
+        "MREN 241" : ["Fluid Mechanics and Fluid Power", "F"],
+        "ELEC 221" : ["Electric Circuits", "F"],
+        "ELEC 252" : ["Electronics I", "F"],
+        "ELEC 271" : ["Digital Systems", "F"],
+        "MECH 221" : ["Solid Mechanics I", "F"],
+        "ELEC 274" : ["Computer Architecture", "F"],
+        "MTHE 228" : ["Complex Analysis", "F"],
+        "MTHE 237" : ["Differential Equations for Engineering Science", "F"],
+        "MECH 228" : ["Kinematics And Dynamics", "F"]
+    },
+
+    "sub-plans": {
+
+    },
+
+    "choices": [
+
+    ]
+}

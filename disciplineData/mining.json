@@ -1,0 +1,25 @@
+{
+    "name" : "Mining Engineering",
+
+    "common core courses": {
+        "APSC 200" : ["Engineering Design & Practice II", "F"],
+        "APSC 293" : ["Engineering Communications", "F"],
+        "CHEE 209" : ["Analysis Of Process Data", "F"],
+        "CIVL 230" : ["Solid Mechanics I", "F"],
+        "MINE 201" : ["Introduction to Mining and Mineral Processing", "F"],
+        "CHEE 210" : ["Thermodynamics of Energy Conversion Systems", "F"],
+        "CIVL 222" : ["Numerical Methods", "F"],
+        "MINE 267" : ["Applied Chemistry for Mining", "F"],
+        "MINE 268" : ["AAnalytical Methods in Mining", "F"],
+        "MINE 272" : ["Applied Data Science", "F"],
+        "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "F"]
+    },
+
+    "sub-plans": {
+
+    },
+
+    "choices": [
+
+    ]
+}
