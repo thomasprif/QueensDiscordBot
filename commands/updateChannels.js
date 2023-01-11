@@ -2,7 +2,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require("discord.js");
 const path = require("node:path");
 const tools = require(path.join("..", "tools.js"));
-const fs = require("node:fs");
+const { getDisciplines } = require("../tools");
 
 function getChannelName(channel){
     return channel.name;
@@ -16,18 +16,14 @@ module.exports = {
         .setDescription("Updates Channel with discipline data")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
-
         const guild = interaction.guild;
-        const disciplineDataPath = path.join(__dirname, "..", "disciplineData");
-        const disciplineFiles = fs.readdirSync(disciplineDataPath).filter(file => file.endsWith(".json"));
         
         let channels = await Array.from(guild.channels.cache.values());
         channels = channels.map(getChannelName);
 
+        const disciplines = getDisciplines();
 
-        for(const file of disciplineFiles){
-            const filePath = path.join(disciplineDataPath, file);
-            const discipline = require(filePath);
+        for(const discipline of disciplines){
 
             const courses = tools.getCourses(discipline);
 
