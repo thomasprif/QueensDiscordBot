@@ -1,10 +1,11 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const { getDiscplineRoles, getDisciplines, addRole } = require("../tools");
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("update-roles")
-        .setDescription("creates and updates roles based for each discipline and sub path"),
+        .setDescription("creates and updates roles based for each discipline and sub path")
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
 
         const guild = interaction.guild;
