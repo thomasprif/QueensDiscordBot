@@ -1,5 +1,5 @@
 /* eslint-disable no-inner-declarations */
-const { SlashCommandBuilder, PermissionFlagsBits, ChannelType } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, ChannelType } = require("discord.js");
 const path = require("node:path");
 const tools = require(path.join("..", "tools.js"));
 const { getDisciplines } = require("../tools");
@@ -20,7 +20,7 @@ module.exports = {
         
         let channels = await Array.from(guild.channels.cache.values());
         channels = channels.map(getChannelName);
-
+            
         const disciplines = getDisciplines();
 
         for(const discipline of disciplines){
@@ -34,7 +34,14 @@ module.exports = {
                         name: course,
                         type: ChannelType.GuildText,
                         topic: topic,
+                        permissionOverwrites: [
+                            {
+                                id: guild.id,
+                                deny: [PermissionsBitField.Flags.ViewChannel],
+                            },
+                        ],
                     });
+                    channels.push(course);
                 }
             }
 
