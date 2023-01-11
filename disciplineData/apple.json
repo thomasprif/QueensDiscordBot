@@ -12,7 +12,7 @@
     },
 
     "sub-plans": {
-        "ENP1": {
+        "APM": {
             "name" : "Applied Mechanics",
             "courses" : {
                 "MECH 221" : ["Solid Mechanics I", "F"],
@@ -22,7 +22,7 @@
                 "ENPH 225" : ["Mechanics", "F"]
             } 
         },
-        "ENP2": {
+        "APC": {
             "name" : "Computing and Communications",
             "courses" : {
                 "CMPE 212" : ["Introduction to Computing Science II", "F"],
@@ -32,20 +32,14 @@
                 "ENPH 239" : ["Eng. Electricity & Magnestism", "F"]
             }
         },
-        "ENP3": {
-            "name" : "Mechanical",
+        "APS": {
+            "name" : "Systems and Robotics",
             "courses" : {
+                "ELEC 221" : ["Electric Circuits", "F"],
+                "ELEC 271" : ["Digital Systems", "F"],
                 "ENPH 225" : ["Mechanics", "F"],
-                "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
-                "MECH 241" : ["Fluid Mechanics I", "F"]
-            }
-        },
-        "ENP4": {
-            "name" : "Computing",
-            "courses" : {
-                "CMPE 212" : ["Introduction to Computing Science II", "F"],
-                "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
-                "ENPH 225" : ["Mechanics", "F"]
+                "ELEC 252" : ["Electronics I", "F"],
+                "ELEC 274" : ["Computer Architecture", "F"]
             }
         }
     },
