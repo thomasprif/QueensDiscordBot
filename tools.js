@@ -4,20 +4,23 @@ module.exports = {
 
     // Takes disicpline JSON file and finds all courses, retruns list of every course + Description + Semseter
     // Also returns courses only for a subdiscpline if specified else returns all courses in JSON
-    getCourses: function(discipline, Subdiscipline = "None"){
+    getCourses: function(discipline, Subdiscipline = "None", CommonCoreOnly = false, SubdiscplineOnly = false){
 
         const allCourses = [];
 
-        for(const course in discipline["common core courses"]){
-            const topic = discipline["common core courses"][course][0];
-            const semester = discipline["common core courses"][course][1];
-            allCourses.push([course, topic, semester]);
+        if(!SubdiscplineOnly){
+            for(const course in discipline["common core courses"]){
+                const topic = discipline["common core courses"][course][0];
+                const semester = discipline["common core courses"][course][1];
+                allCourses.push([course, topic, semester]);
+            }
         }
+        if(CommonCoreOnly) return allCourses;
+
 
         if(Subdiscipline !== "None"){
             for(const d in discipline["sub-plans"]){
                 if(discipline["sub-plans"][d]["name"] === Subdiscipline){
-                    console.log("test");
                     Subdiscipline = d;
                     break;
                 }

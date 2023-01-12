@@ -1,8 +1,9 @@
 /* eslint-disable no-inner-declarations */
 const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, ChannelType } = require("discord.js");
 const path = require("node:path");
-const tools = require(path.join("..", "tools.js"));
+const { getCourses } = require(path.join("..", "tools.js"));
 const { getDisciplines } = require("../tools");
+const { currentSemester } = require(path.join("..", "config.json"));
 
 function getChannelName(channel){
     return channel.name;
@@ -41,14 +42,44 @@ module.exports = {
             }
         }
 
-        function updateClassChannelPermisions(){
+        async function updateClassChannelPermisions(discipline){
+
+            const role = guild.roles.cache.find((r) => r.name === discipline["name"]);
+            let courses = getCourses(discipline, undefined, true).map((c) => {return c[0];});
+            for(let c of courses){
+                c = c.toLowerCase().replace(' ', '-');
+                const channel = guild.channels.cache.find((ch) => ch.name === c);
+                await channel.permissionOverwrites.edit(role.id, {ViewChannel: true});
+            }
+
             
+            
+            
+            
+            
+            
+            
+            
+            let subdiscplines = Object.keys(discipline["sub-plans"]);
+            subdiscplines = subdiscplines.map((d) => {return discipline["sub-plans"][d]["name"];});
+
+
+
+
+            if(subdiscplines.length === 0){
+                courses = getCourses(discipline);
+            }
+            for(const s of subdiscplines){
+                courses = getCourses(discipline, s);
+            }
         }
 
 
         for(const discipline of disciplines){
 
-            const courses = tools.getCourses(discipline);
+            updateClassChannelPermisions(discipline);
+
+            const courses = getCourses(discipline);
 
             for(const course of courses){
                 updateClassChannel(course[0], course[1]);
