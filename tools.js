@@ -75,6 +75,7 @@ module.exports = {
 
     assignRole: async function(member, role_name){
         const role = member.guild.roles.cache.find((r) => r.name === role_name);
+        if (!role) return;
         member.roles.add(role);
     },
 };

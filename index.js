@@ -114,7 +114,7 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 // Modal Interraction
-client.on(Events.InteractionCreate, interaction => {
+client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
     // Get user input
     const input = interaction.fields.fields.first().value;
@@ -135,7 +135,8 @@ client.on(Events.InteractionCreate, interaction => {
     });
     courses = courses.filter(realCourse => {return realCourse == course});
     if (!courses[0]) return interaction.reply({content: `Error, cannot find course ${course}`, ephemeral: true});
-    interaction.reply({content: `Added to course ${course}`, ephemeral: true});
+    await assignRole(interaction.member, course);
+    await interaction.reply({content: `Added to course ${course}`, ephemeral: true});
 });
 
 client.login(token);
