@@ -17,7 +17,7 @@ module.exports = {
                         new ButtonBuilder()
                             .setCustomId(`Elective Button`)
                             .setLabel("Pick Elective")
-                            .setStyle(ButtonStyle.Primary)
+                            .setStyle(ButtonStyle.Primary),
                 );
 
         const embed = new EmbedBuilder()

@@ -10,8 +10,9 @@ module.exports = {
             return channel.name;
         }
         
+        console.log(interaction.guild.roles.cache);
 
-        let channels = await Array.from(interaction.guild.channels.cache.values());
+        let channels = await Array.from(interaction.guild.roles.cache.values());
         channels = channels.map(getChannelName);
 
         console.log(channels);
@@ -22,9 +23,12 @@ module.exports = {
         }
 
         for(const c of channels){
-            console.log(c);
-            const fetchedChannel = await Array.from(interaction.guild.channels.cache.values()).find(r => r.name === c);
-            fetchedChannel.delete();
+            const fetchedChannel = await Array.from(interaction.guild.roles.cache.values()).find(r => r.name === c);
+            try{
+                await fetchedChannel.delete();
+            } catch(error) {
+                console.log("Cant delete");
+            }
         }
 
         

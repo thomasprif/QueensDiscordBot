@@ -59,12 +59,13 @@ module.exports = {
     
     addRole: async function(guild, roleName, colour) {
         // Get role and create if it doesn't exist
-
-        const role = guild.roles.cache.find((r) => r.name === roleName);
+        const role = await guild.roles.cache.find((r) => r.name === roleName);
 
         if (role !== undefined){
             return;
         }
+
+        console.log(`${roleName} does not exist`);
 
         await guild.roles.create({
             name: roleName,

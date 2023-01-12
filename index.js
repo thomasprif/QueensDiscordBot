@@ -64,9 +64,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		// Create the text input components
 		const courseCodeInput = new TextInputBuilder()
 			.setCustomId('Course Code Input')
-		    // The label is the prompt the user sees for this input
+            // The label is the prompt the user sees for this input
 			.setLabel("Please enter the course code (APSC 200)")
-		    // Short means only a single line of text
+            // Short means only a single line of text
 			.setStyle(TextInputStyle.Short);
 
 		// Add inputs to the modal
@@ -131,9 +131,9 @@ client.on(Events.InteractionCreate, async interaction => {
     getDisciplines().forEach(discipline => {
         getCourses(discipline).forEach(course => {
             courses.push(course[0]);
-        })
+        });
     });
-    courses = courses.filter(realCourse => {return realCourse == course});
+    courses = courses.filter(realCourse => {return realCourse == course;});
     if (!courses[0]) return interaction.reply({content: `Error, cannot find course ${course}`, ephemeral: true});
     await assignRole(interaction.member, course);
     await interaction.reply({content: `Added to course ${course}`, ephemeral: true});
