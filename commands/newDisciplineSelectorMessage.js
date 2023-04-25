@@ -9,21 +9,21 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("new-disicpline-selector-message")
-        .setDescription("Creates a new message for users to select diciplines")
+        .setDescription("Creates a new message for users to select diciplines and subdisciplines")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
-        const disciplines = getDisciplines().map(discipline => discipline["name"]);
+        const disciplines = getDisciplines().map(discipline => discipline["name"]); // Get a list of discipline names
         const rows = [];
 
-        for(let i = 0; i < disciplines.length; i += 5){
-            if(i + 5 >= disciplines.length){
+        for(let i = 0; i < disciplines.length; i += 5){ // Split disciplines into rows of 5
+            if(i + 5 >= disciplines.length){ // Cant have a full row
                 rows.push(disciplines.slice(i, disciplines.length));
                 break;
             }
             rows.push(disciplines.slice(i, i + 5));
         }
 
-        rows.forEach((value, index) => {
+        rows.forEach((value, index) => { // Add buttons to each row
             rows[index] = new ActionRowBuilder()
                 .addComponents(
                     ...value.map(name => {
@@ -35,7 +35,7 @@ module.exports = {
                 );
         });
 
-        rows.push(
+        rows.push( // Add the not sure button
         new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()

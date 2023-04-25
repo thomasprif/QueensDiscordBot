@@ -92,7 +92,10 @@ client.on(Events.InteractionCreate, async interaction => {
         }, []);
         
         if (options.length == 0) { // Cant have an empty dropdown
-            await interaction.reply({ content: `No electives to remove!`, ephemeral: true});
+            const embed = new EmbedBuilder()
+                .setColor(0x0099FF)
+                .setTitle('No Electives To Remove!');
+            await interaction.reply({ content: "", embeds: [embed], ephemeral: true});
             return;
         }
         const select = new StringSelectMenuBuilder()
@@ -102,7 +105,11 @@ client.on(Events.InteractionCreate, async interaction => {
             .setMinValues(1)
             .setMaxValues(options.length);
         const row = new ActionRowBuilder().addComponents(select);
-        await interaction.reply({ content: 'Please select the electives to be removed', components: [row], ephemeral: true});
+
+        const embed = new EmbedBuilder()
+            .setColor(0x0099FF)
+            .setTitle('Please select the electives to be removed');
+        await interaction.reply({ content: '', components: [row], embeds: [embed], ephemeral: true});
         return;
     }
 
@@ -175,7 +182,7 @@ client.on(Events.InteractionCreate, async interaction => {
             courses.push(course[0]);
         });
     });
-    courses = courses.filter(realCourse => {return realCourse == course;});
+    courses = courses.filter(realCourse => {return realCourse == course});
     if (!courses[0]) return interaction.reply({content: `Error, cannot find course ${course}`, ephemeral: true});
     await assignRole(interaction.member, course);
     await interaction.reply({content: `Added to course ${course}`, ephemeral: true});
@@ -187,13 +194,16 @@ client.on(Events.InteractionCreate, async interaction => {
     if (interaction.customId == "Remove Elective Menu") {
         const roles = interaction.values;
         roles.forEach(role => assignRole(interaction.member, role, true)); // Remove roles
+        const embed = new EmbedBuilder()
+            .setColor(0x0099FF)
         if (roles.length == 0) {
-            await interaction.update({ content: `No electives to remove!`, components: [], ephemeral: true});
+            embed.setTitle(`No electives found! This is really bad :(`);
         } else if (roles.length == 1) {
-            await interaction.update({ content: `Removed from ${roles[0]}`, components: [], ephemeral: true});
+            embed.setTitle(`Removed from ${roles[0]}`);
         } else {
-            await interaction.update({ content: `Removed from ${roles.slice(0,-1).join(', ') + " and " + roles.slice(-1)}`, components: [], ephemeral: true});
+            embed.setTitle(`Removed from ${roles.slice(0,-1).join(', ') + " and " + roles.slice(-1)}`);
         }
+        await interaction.update({ content: "", components: [], embeds: [embed], ephemeral: true});
         return;
     }
 })
