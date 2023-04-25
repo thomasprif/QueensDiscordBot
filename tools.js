@@ -4,9 +4,15 @@ module.exports = {
 
     // Takes disicpline JSON file and finds all courses, retruns list of every course + Description + Semseter
     // Also returns courses only for a subdiscpline if specified else returns all courses in JSON
-    getCourses: function(discipline, Subdiscipline = "None", CommonCoreOnly = false, SubdiscplineOnly = false){
+    getCourses: function(discipline = "All", Subdiscipline = "None", CommonCoreOnly = false, SubdiscplineOnly = false){
 
         const allCourses = [];
+        if (discipline === "All") { // If no discipline is given, return courses for all
+            this.getDisciplines().forEach(d => {
+                this.getCourses(d).map(allCourses.push);
+            });
+            return allCourses;
+        }
 
         if(!SubdiscplineOnly){
             for(const course in discipline["common core courses"]){
@@ -102,9 +108,13 @@ module.exports = {
 
     },
 
-    assignRole: async function(member, role_name){
+    assignRole: async function(member, role_name, remove=false){
         const role = member.guild.roles.cache.find((r) => r.name === role_name);
         if (!role) return;
-        member.roles.add(role);
+        if(remove) {
+            member.roles.remove(role);
+        } else {
+            member.roles.add(role);
+        }
     },
 };

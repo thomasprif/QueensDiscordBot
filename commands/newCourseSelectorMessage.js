@@ -12,18 +12,25 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
 
-            const button = new ActionRowBuilder()
+            const buttons = new ActionRowBuilder()
                 .addComponents(
                         new ButtonBuilder()
-                            .setCustomId(`Elective Button`)
+                            .setCustomId(`Add Elective Button`)
                             .setLabel("Pick Elective")
                             .setStyle(ButtonStyle.Primary),
                 );
+                buttons.addComponents(
+                        new ButtonBuilder()
+                            .setCustomId(`Remove Elective Button`)
+                            .setLabel("Remove all electives")
+                            .setStyle(ButtonStyle.Danger),
+                );
+            
 
         const embed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Add an elective!');
 
-         interaction.reply({ content: "", embeds: [embed], components: [button] });
+         interaction.reply({ content: "", embeds: [embed], components: [buttons] });
     },
 };

@@ -55,7 +55,7 @@ client.on(Events.InteractionCreate, async interaction => {
 // Button Event
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isButton()) return;
-    if (interaction.customId == "Elective Button") { // Pick elective buttons
+    if (interaction.customId == "Add Elective Button") { // Pick elective buttons
         const modal = new ModalBuilder()
 			.setCustomId('ElectiveModal')
 			.setTitle('Pick Elective');
@@ -75,6 +75,16 @@ client.on(Events.InteractionCreate, async interaction => {
 
 		// Show the modal to the user
 		await interaction.showModal(modal);
+        return;
+    }
+    else if (interaction.customId == "Remove Elective Button") { // Remove elective buttons
+        const roles = interaction.member.roles.cache.filter(role => {
+            return /^[A-Z]{4} \d{3}$/.test(role.name);
+        }).map(role => {
+            assignRole(interaction.member, role.name, true); // Remove the role
+            return role.name;
+        });
+        await interaction.reply({ content: `Removed from ${roles.slice(0,-1).join(', ') + " and " + roles.slice(-1)}`, ephemeral: true});
         return;
     }
 
