@@ -22,7 +22,7 @@ module.exports = {
                 buttons.addComponents(
                         new ButtonBuilder()
                             .setCustomId(`Remove Elective Button`)
-                            .setLabel("Remove all electives")
+                            .setLabel("Remove electives")
                             .setStyle(ButtonStyle.Danger),
                 );
             
