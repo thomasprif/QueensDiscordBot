@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { UserSelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 const { token } = require("./config.json");
 const { getCourses, getDisciplines, assignRole } = require("./tools.js");
@@ -77,23 +77,48 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.showModal(modal);
         return;
     }
+
     else if (interaction.customId == "Remove Elective Button") { // Remove elective buttons
-        const roles = interaction.member.roles.cache.filter(role => {
-            return /^[A-Z]{4} \d{3}$/.test(role.name);
-        }).map(role => {
-            assignRole(interaction.member, role.name, true); // Remove the role
-            return role.name;
-        });
-        await interaction.reply({ content: `Removed from ${roles.slice(0,-1).join(', ') + " and " + roles.slice(-1)}`, ephemeral: true});
+        const courses = getCourses();
+        const options = courses.filter(course => { // Filter courses where user has that role
+            return interaction.member.roles.cache.find(role => {return course[0] == role.name});
+        }).map(course => { // Map onto the object that is used by the menu
+           return { label: course[0], description: course[1], value: course[0]} 
+        }).reduce((acc, item) => { // Remove duplicates
+            if(!acc.find(obj => obj.value == item.value)) {
+                acc.push(item);
+            }
+            return acc;
+        }, []);
+        
+        if (options.length == 0) { // Cant have an empty dropdown
+            await interaction.reply({ content: `No electives to remove!`, ephemeral: true});
+            return;
+        }
+        const select = new StringSelectMenuBuilder()
+        			.setCustomId("Remove Elective Menu")
+        			.setPlaceholder("Select electives to remove")
+        			.addOptions(options)
+            .setMinValues(1)
+            .setMaxValues(options.length);
+        const row = new ActionRowBuilder().addComponents(select);
+        await interaction.reply({ content: 'Please select the electives to be removed', components: [row], ephemeral: true});
         return;
     }
 
-    const discipline = [{name: "Not Sure", 'sub-plans': {}}, ...getDisciplines()].filter(discipline => {
-        return discipline["name"] == interaction.customId;
-    })[0];
-    if (discipline){
+    const disciplines = [{name: "Not Sure", 'sub-plans': {}}, ...getDisciplines()];
+    const discipline = disciplines.filter(discipline => {return discipline["name"] == interaction.customId})[0];
+    if (discipline){ // Found the discipline in the interaction ID
+        // Clear disciplines and sub disciplines
+        for(const disc of disciplines) {
+            await assignRole(interaction.member, disc["name"], true);
+            if(disc["name"] != interaction.customId) { // Dont remove subdisciplines from the one they selected
+                for(const d in disc["sub-plans"]) {
+                    await assignRole(interaction.member, disc["sub-plans"][d]["name"], true);
+                }
+            }
+        }
         // Discipline button
-        await assignRole(interaction.member, interaction.customId); // Add discipline role to user
 
         if (Object.keys(discipline["sub-plans"]).length == 0) {
             // No subdisciplines
@@ -116,8 +141,14 @@ client.on(Events.InteractionCreate, async interaction => {
                   .setTitle(`Choose Your ${discipline["name"]} Sub-Discipline!`);
             await interaction.reply({ content: "", embeds: [embed], components: [row], ephemeral: true });
         }
+        await assignRole(interaction.member, interaction.customId); // Add discipline role to user
     } else {
         // Subdiscipline button
+        for(const discipline of getDisciplines()) {
+            for(const d in discipline["sub-plans"]) {
+                await assignRole(interaction.member, discipline["sub-plans"][d]["name"], true);
+            }
+        }
         await interaction.reply({ content: `Added to ${interaction.customId}`, ephemeral: true});
         await assignRole(interaction.member, interaction.customId); // Add discipline role to user
 
@@ -149,5 +180,22 @@ client.on(Events.InteractionCreate, async interaction => {
     await assignRole(interaction.member, course);
     await interaction.reply({content: `Added to course ${course}`, ephemeral: true});
 });
+
+// Handle multiselect menus
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isStringSelectMenu()) return;
+    if (interaction.customId == "Remove Elective Menu") {
+        const roles = interaction.values;
+        roles.forEach(role => assignRole(interaction.member, role, true)); // Remove roles
+        if (roles.length == 0) {
+            await interaction.update({ content: `No electives to remove!`, components: [], ephemeral: true});
+        } else if (roles.length == 1) {
+            await interaction.update({ content: `Removed from ${roles[0]}`, components: [], ephemeral: true});
+        } else {
+            await interaction.update({ content: `Removed from ${roles.slice(0,-1).join(', ') + " and " + roles.slice(-1)}`, components: [], ephemeral: true});
+        }
+        return;
+    }
+})
 
 client.login(token);

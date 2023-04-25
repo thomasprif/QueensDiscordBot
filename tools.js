@@ -8,8 +8,8 @@ module.exports = {
 
         const allCourses = [];
         if (discipline === "All") { // If no discipline is given, return courses for all
-            this.getDisciplines().forEach(d => {
-                this.getCourses(d).map(allCourses.push);
+            module.exports.getDisciplines().forEach(d => {
+                module.exports.getCourses(d).forEach(course => {allCourses.push(course)});
             });
             return allCourses;
         }
@@ -110,11 +110,17 @@ module.exports = {
 
     assignRole: async function(member, role_name, remove=false){
         const role = member.guild.roles.cache.find((r) => r.name === role_name);
-        if (!role) return;
-        if(remove) {
-            member.roles.remove(role);
-        } else {
-            member.roles.add(role);
+        if (!role) return; // Role not in guild (uh oh)
+        if(member.roles.cache.find(r => r.name === role_name)) { // If user has that role
+            if(remove) { // We're trying to remove it
+                // console.log(`removing ${role["name"]}`);
+                member.roles.remove(role);
+            }
+        } else { // User doesn't have the role
+            if(!remove) { // We're trying to add it
+                // console.log(`removing ${role["name"]}`);
+                member.roles.add(role);
+            }
         }
     },
 };
