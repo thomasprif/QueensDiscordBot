@@ -35,17 +35,6 @@ module.exports = {
                 );
         });
 
-        rows.push( // Add the not sure button
-        new ActionRowBuilder()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId("Not Sure")
-                .setLabel("Not Sure")
-                .setStyle(ButtonStyle.Primary),
-        ));
-
-
-
         const embed = new EmbedBuilder()
             .setColor(0x0099FF)
             .setTitle('Choose Your Discipline!');

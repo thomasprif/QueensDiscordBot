@@ -17,17 +17,20 @@ module.exports = {
         .setDescription("Updates Channel with discipline data")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
+
+        interaction.reply("Creating Channels");
         const guild = interaction.guild;
         
         let channels = await Array.from(guild.channels.cache.values());
-        channels = channels.map(getChannelName);
+        channels = channels.map(getChannelName); // Name of all the channels
             
-        const disciplines = getDisciplines();
+        const disciplines = getDisciplines(); // Get all the disciplines
 
-        function updateClassChannel(course, topic){
-            course = course.toLowerCase().replace(' ', '-');
-            if(!(channels.includes(course))){
-                guild.channels.create({
+
+        async function updateClassChannel(course, topic){ // Create channel if it doesn't exist. Course code and topic=description
+            course = course.toLowerCase().replace(' ', '-'); // APSC 200 -> APSC-200
+            if(!(channels.includes(course))){ // Create it if it doesn't exist
+                await guild.channels.create({
                     name: course,
                     type: ChannelType.GuildText,
                     topic: topic,
@@ -38,57 +41,68 @@ module.exports = {
                         },
                     ],
                 });
-                channels.push(course);
+                channels.push(course); // Keep track of channels for ease of use and to prevent dupes
             }
         }
 
-        async function updateClassChannelPermisions(discipline){
-
-            const role = guild.roles.cache.find((r) => r.name === discipline["name"]);
-            let courses = getCourses(discipline, undefined, true).map((c) => {return c[0];});
-            for(let c of courses){
-                c = c.toLowerCase().replace(' ', '-');
-                const channel = guild.channels.cache.find((ch) => ch.name === c);
+        async function addPermissions(courseArray, role){ // Give a role permissions to all courses in the array
+            for(let c of courseArray){ // For each course code
+                c[0] = c[0].toLowerCase().replace(' ', '-'); // Convert to channel name
+                console.log(c[0]);
+                const channel = guild.channels.cache.find((ch) => ch.name === c[0]); // Find channel
+                if(!channel) { // Channel doesn't exist
+                    console.log("error channel: " + c[0] + " should have already been created");
+                    await updateClassChannel(c[0], c[1]); // Try and create the channel
+                    await addPermissions(courseArray, role);
+                    return;
+                }
                 await channel.permissionOverwrites.edit(role.id, {ViewChannel: true});
             }
+        }
 
-            
-            
-            
-            
-            
-            
-            
-            
+        async function updateClassChannelPermisions(discipline){ // Handle all the subdiscipline perms for a discipline
+            // Gets role for main discipline
+            const disciplineRole = guild.roles.cache.find((r) => r.name === discipline["name"]);
+
+            // Get current semester core courses
+            let courses = getCourses(discipline, undefined, true).filter((c) => {
+                return c[2] === currentSemester;
+            });
+         
+            await addPermissions(courses, disciplineRole);
+
+            // Get subdisciplines
             let subdiscplines = Object.keys(discipline["sub-plans"]);
             subdiscplines = subdiscplines.map((d) => {return discipline["sub-plans"][d]["name"];});
 
-
-
-
-            if(subdiscplines.length === 0){
-                courses = getCourses(discipline);
-            }
             for(const s of subdiscplines){
-                courses = getCourses(discipline, s);
+                // Get subdiscipline role
+                const subDiscRole = guild.roles.cache.find((r) => r.name === s);
+
+                // Get current semester subdiscipline courses
+                courses = getCourses(discipline, s, false, true).filter((c) => {
+                    return c[2] === currentSemester;
+                });
+
+                // Add role to channels
+                await addPermissions(courses, subDiscRole);
+                // TODO make this shit recursive for subsubdisciplines, etc...
             }
         }
 
-
-        for(const discipline of disciplines){
-
-            updateClassChannelPermisions(discipline);
-
-            const courses = getCourses(discipline);
-
-            for(const course of courses){
-                updateClassChannel(course[0], course[1]);
-
+        // Create channels and add permissions for course roll
+        for(const course of getCourses()) {
+            if(!(channels.includes(course[0].toLowerCase().replace(' ', '-')))){ // Create it if it doesn't exist
+                await updateClassChannel(course[0], course[1]); // Create all the channels
+                const courseRole = guild.roles.cache.find((r) => r.name === course[0]);
+                await addPermissions([course],courseRole);
             }
+        }
 
+        for(const discipline of disciplines){ // For each discipline
+            await updateClassChannelPermisions(discipline); // Handle all main/subdiscipline permissions
+        }
 
-            }
-
-        await interaction.reply("Created Channel");
+        console.log("Done updating channels");
     },
 };

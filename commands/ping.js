@@ -10,12 +10,10 @@ module.exports = {
             return channel.name;
         }
         
-        console.log(interaction.guild.roles.cache);
+            // console.log(interaction.guild.roles.cache);
 
-        let channels = await Array.from(interaction.guild.roles.cache.values());
+        let channels = await Array.from(interaction.guild.channels.cache.values());
         channels = channels.map(getChannelName);
-
-        console.log(channels);
 
         const index = channels.indexOf("general");
         if (index > -1) { // only splice array when item is found
@@ -23,7 +21,7 @@ module.exports = {
         }
 
         for(const c of channels){
-            const fetchedChannel = await Array.from(interaction.guild.roles.cache.values()).find(r => r.name === c);
+            const fetchedChannel = await Array.from(interaction.guild.channels.cache.values()).find(r => r.name === c);
             try{
                 await fetchedChannel.delete();
             } catch(error) {
