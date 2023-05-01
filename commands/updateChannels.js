@@ -3,7 +3,7 @@ const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, ChannelTy
 const path = require("node:path");
 const { getCourses } = require(path.join("..", "tools.js"));
 const { getDisciplines } = require("../tools");
-const { currentSemester } = require(path.join("..", "config.json"));
+const { currentSemester, activeCoursesCategoryID } = require(path.join("..", "config.json"));
 
 function getChannelName(channel){
     return channel.name;
@@ -30,7 +30,7 @@ module.exports = {
         async function updateClassChannel(course, topic){ // Create channel if it doesn't exist. Course code and topic=description
             course = course.toLowerCase().replace(' ', '-'); // APSC 200 -> APSC-200
             if(!(channels.includes(course))){ // Create it if it doesn't exist
-                await guild.channels.create({
+                let channel = await guild.channels.create({
                     name: course,
                     type: ChannelType.GuildText,
                     topic: topic,
@@ -41,6 +41,7 @@ module.exports = {
                         },
                     ],
                 });
+                await channel.setParent(activeCoursesCategoryID); // Put it in the category
                 channels.push(course); // Keep track of channels for ease of use and to prevent dupes
             }
         }
