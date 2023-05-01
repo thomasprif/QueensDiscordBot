@@ -41,7 +41,7 @@ module.exports = {
                         },
                     ],
                 });
-                await channel.setParent(activeCoursesCategoryID); // Put it in the category
+                // await channel.setParent(activeCoursesCategoryID); // Put it in the category
                 channels.push(course); // Keep track of channels for ease of use and to prevent dupes
             }
         }
