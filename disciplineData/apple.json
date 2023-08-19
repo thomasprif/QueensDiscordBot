@@ -4,11 +4,11 @@
     "common core courses": {
         "APSC 200" : ["Engineering Design & Practice II", "F"],
         "APSC 293" : ["Engineering Communications", "F"],
-        "MTHE 212" : ["Linear Algebra", "F"],
+        "MTHE 212" : ["Linear Algebra", "W"],
         "MTHE 217" : ["Algebraic Structures", "F"],
         "MTHE 237" : ["Differential Equations for Engineering Science", "F"],
-        "MTHE 280" : ["Relativity And Quanta", "F"],
-        "MTHE 281" : ["Introduction to Real Analysis", "F"]
+        "MTHE 280" : ["Advanced Calculus", "F"],
+        "MTHE 281" : ["Introduction to Real Analysis", "W"]
     },
 
     "sub-plans": {
@@ -16,20 +16,20 @@
             "name" : "Applied Mechanics",
             "courses" : {
                 "MECH 221" : ["Solid Mechanics I", "F"],
-                "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "F"],
-                "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
+                "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "W"],
+                "MREN 230" : ["Thermodynamics and Heat Transfer", "W"],
                 "MREN 241" : ["Fluid Mechanics and Fluid Power", "F"],
-                "ENPH 225" : ["Mechanics", "F"]
+                "ENPH 225" : ["Mechanics", "W"]
             } 
         },
         "APC": {
             "name" : "Computing and Communications",
             "courses" : {
-                "CMPE 212" : ["Introduction to Computing Science II", "F"],
+                "CMPE 212" : ["Introduction to Computing Science II", "W"],
                 "ELEC 271" : ["Digital Systems", "F"],
-                "ELEC 274" : ["Computer Architecture", "F"],
+                "ELEC 274" : ["Computer Architecture", "W"],
                 "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
-                "ENPH 239" : ["Eng. Electricity & Magnestism", "F"]
+                "ENPH 239" : ["Eng. Electricity & Magnestism", "W"]
             }
         },
         "APS": {
@@ -37,9 +37,10 @@
             "courses" : {
                 "ELEC 221" : ["Electric Circuits", "F"],
                 "ELEC 271" : ["Digital Systems", "F"],
-                "ENPH 225" : ["Mechanics", "F"],
-                "ELEC 252" : ["Electronics I", "F"],
-                "ELEC 274" : ["Computer Architecture", "F"]
+                "ENPH 225" : ["Mechanics", "W"],
+                "ENPH 239" : ["Eng. Electricity & Magnestism", "W"],
+                "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
+                "ELEC 274" : ["Computer Architecture", "W"]
             }
         }
     },
