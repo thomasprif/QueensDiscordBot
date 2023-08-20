@@ -1,25 +1,26 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
-const { Term } = require("config.json");
+const { UserSelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { ModalBuilder } = require('discord.js');
+const { currentSemester } = require("../config.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("ChangeTerm")
+        .setName("new-term-change-message")
         .setDescription("Changes the current term")
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
-        const modal = new ModalBuilder()
-            .setCustomId('ChangeTermModal')
-            .setTitle('Change Term');
+        const embed = new EmbedBuilder()
+            .setColor(0x0099FF)
+            .setTitle(`Change Current Term`);
         
         const terms = new StringSelectMenuBuilder()
             .setCustomId("Term Dropdown Menu")
-            .setPlaceHolder("Select Term")
-        .addOptions(["Fall", "Winter", "Summer"]);
+            .setPlaceholder("Select Term")
+            .addOptions(["Fall", "Winter", "Summer"].map(item => { return { label: item, description: `Change term to ${item}`, value: item.toLowerCase() };}))
+            .setMinValues(1)
+            .setMaxValues(1);
         const row = new ActionRowBuilder().addComponents(terms);
 
-        modal.addComponents(row);
-        await interaction.showModal(modal);
-
-        await interaction.reply({content: `Changed Term to ${}`, ephemeral: true});
+        await interaction.reply({ content: "", components: [row], embeds: [embed], ephemeral: false});
     },
 };

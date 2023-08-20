@@ -3,7 +3,6 @@ const { SlashCommandBuilder, PermissionFlagsBits, PermissionsBitField, ChannelTy
 const path = require("node:path");
 const { getCourses } = require(path.join("..", "tools.js"));
 const { getDisciplines } = require("../tools");
-const { currentSemester, activeCoursesCategoryID } = require(path.join("..", "config.json"));
 
 function getChannelName(channel){
     return channel.name;
@@ -18,7 +17,8 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     async execute(interaction) {
 
-        interaction.reply("Creating Channels");
+        const { currentSemester, activeCoursesCategoryID } = require(path.join("..", "config.json")); // Do this at command execution instead of startup as term can change during runtime
+        interaction.reply(`Creating Channels. Current Term: ${currentSemester})`);
         const guild = interaction.guild;
         
         let channels = await Array.from(guild.channels.cache.values());
@@ -28,7 +28,7 @@ module.exports = {
 
 
         async function updateClassChannel(course, topic){ // Create channel if it doesn't exist. Course code and topic=description
-            course = course.toLowerCase().replace(' ', '-'); // APSC 200 -> APSC-200
+            course = course.toLowerCase().replace(' ', '-'); // APSC 200 -> apsc-200
             if(!(channels.includes(course))){ // Create it if it doesn't exist
                 let channel = await guild.channels.create({
                     name: course,
@@ -91,7 +91,7 @@ module.exports = {
             }
         }
 
-        // Create channels and add permissions for course roll
+        // Create channels and add permissions for course role
         for(const course of getCourses()) {
             if(!(channels.includes(course[0].toLowerCase().replace(' ', '-')))){ // Create it if it doesn't exist
                 await updateClassChannel(course[0], course[1]); // Create all the channels

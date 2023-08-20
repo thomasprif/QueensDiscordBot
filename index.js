@@ -166,23 +166,7 @@ client.on(Events.InteractionCreate, async interaction => {
 // Modal Interraction
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
-  if(interaction.customID === "ChangeTermModal") {
-        const input = interaction.fields.fields.first().value;
-        switch(input) {
-            case "Fall":
-                config.currentSemester = "F";
-                break;
-            case "Winter":
-                config.currentSemester = "W";
-                break;
-            case "Summer":
-                config.currentSemester = "S";
-                break;
-            default:
-                return;
-        }
-    fs.writeFile("./config.json", JSON.stringify(config, null, 2)); // Write new config
-  } else if(interaction.customID === "ElectiveModal") {
+  if(interaction.customID === "ElectiveModal") {
     // Get user input
     const input = interaction.fields.fields.first().value;
     let prefix = input.match(/[a-zA-Z]{4}/);
@@ -224,6 +208,24 @@ client.on(Events.InteractionCreate, async interaction => {
         }
         await interaction.update({ content: "", components: [], embeds: [embed], ephemeral: true});
         return;
+    } else if (interaction.customId === "Term Dropdown Menu") {
+        const input = interaction.values[0].toLowerCase();
+        switch(input) {
+            case "fall":
+                config.currentSemester = "F";
+                break;
+            case "winter":
+                config.currentSemester = "W";
+                break;
+            case "summer":
+                config.currentSemester = "S";
+                break;
+            default:
+                await interaction.reply({content: `something went wrong ;(`, ephemeral: true});
+                return;
+        }
+        fs.writeFile("./config.json", JSON.stringify(config, null, 2), () => {}); // Write new config
+        await interaction.reply({content: `Changed Term to ${input}`, ephemeral: true});
     }
 })
 
