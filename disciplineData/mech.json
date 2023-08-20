@@ -2,21 +2,20 @@
     "name" : "Mechanical Engineering",
 
     "common core courses": {
-        "APSC 200" : ["Engineering Design & Practice II", "F"],
-        "APSC 293" : ["Engineering Communications", "F"],
         "MECH 202" : ["Mathematical and Computational Tools for Mechanical Engineers I", "F"],
         "MECH 211" : ["Manufacturing Methods", "F"],
         "MECH 212" : ["Machine Tool Laboratory", "F"],
-        "MECH 213" : ["Manufacturing Methods", "F"],
         "MECH 217" : ["Measurement in Mechatronics", "F"],
         "MECH 221" : ["Solid Mechanics I", "F"],
         "MECH 230" : ["Appled Thermodynamics I", "F"],
         "MECH 270" : ["Materials Science and Engineering", "F"],
-        "MECH 203" : ["Mathematical and Computational Tools for Mechanical Engineers II", "F"],
-        "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "F"],
-        "MECH 228" : ["Kinematics And Dynamics", "F"],
-        "MECH 241" : ["Fluid Mechanics I", "F"],
-        "MECH 273" : ["Materials Science and Engineering Lab", "F"]
+        "APSC 200" : ["Engineering Design & Practice II", "W"],
+        "APSC 293" : ["Engineering Communications", "W"],
+        "MECH 203" : ["Mathematical and Computational Tools for Mechanical Engineers II", "W"],
+        "MECH 210" : ["Electronic Circuits and Motors for Mechatronics", "W"],
+        "MECH 228" : ["Kinematics And Dynamics", "W"],
+        "MECH 241" : ["Fluid Mechanics I", "W"],
+        "MECH 273" : ["Materials Science and Engineering Lab", "W"]
     },
 
     "sub-plans": {

@@ -4,46 +4,47 @@
     "common core courses": {
         "APSC 200" : ["Engineering Design & Practice II", "F"],
         "APSC 293" : ["Engineering Communications", "F"],
-        "ELEC 221" : ["Electric Circuits", "F"],
         "MTHE 227" : ["Vector Analysis", "F"],
         "MTHE 237" : ["Differential Equations for Engineering Science", "F"],
         "ENPH 242" : ["Relativity And Quanta", "F"],
-        "ENPH 211" : ["Applied Physics", "F"],
-        "ENPH 239" : ["Eng. Electricity & Magnestism", "F"],
-        "ENPH 253" : ["Engineering Physics Laboratory", "F"],
-        "ENPH 213" : ["Computational Eng. Physics", "F"]
+        "ELEC 221" : ["Electric Circuits", "F"],
+        "ENPH 211" : ["Applied Physics", "W"],
+        "ENPH 239" : ["Eng. Electricity & Magnestism", "W"],
+        "ENPH 253" : ["Engineering Physics Laboratory", "W"],
+        "ENPH 213" : ["Computational Eng. Physics", "W"]
     },
 
     "sub-plans": {
         "ENP1": {
             "name" : "Electrical",
             "courses" : {
-                "ELEC 252" : ["Electronics I", "F"],
+                "ELEC 252" : ["Electronics I", "W"],
                 "ELEC 271" : ["Digital Systems", "F"],
-                "MREN 223" : ["Signals and Systems", "F"]
+                "MREN 223" : ["Signals and Systems", "W"]
             } 
         },
         "ENP2": {
             "name" : "Materials",
             "courses" : {
-                "ENPH 225" : ["Mechanics", "F"],
-                "MECH 270" : ["Materials Science and Engineering",  "F"]
+                "ENPH 225" : ["Mechanics", "W"],
+                "MECH 270" : ["Materials Science and Engineering",  "F"],
+                "CHEE 210" : ["Thermodynamics of Energy Conversion Systems", "W"]
             }
         },
         "ENP3": {
             "name" : "Mechanical",
             "courses" : {
-                "ENPH 225" : ["Mechanics", "F"],
-                "MREN 230" : ["Thermodynamics and Heat Transfer", "F"],
-                "MECH 241" : ["Fluid Mechanics I", "F"]
+                "ENPH 225" : ["Mechanics", "W"],
+                "MREN 230" : ["Thermodynamics and Heat Transfer", "W"],
+                "MREN 241" : ["Fluid Mechanics and Fluid Power", "F"]
             }
         },
         "ENP4": {
             "name" : "Computing",
             "courses" : {
-                "CMPE 212" : ["Introduction to Computing Science II", "F"],
+                "CMPE 212" : ["Introduction to Computing Science II", "W"],
                 "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
-                "ENPH 225" : ["Mechanics", "F"]
+                "ENPH 225" : ["Mechanics", "W"]
             }
         }
     },

@@ -4,14 +4,14 @@
     "common core courses": {
         "APSC 200" : ["Engineering Design & Practice II", "F"],
         "APSC 293" : ["Engineering Communications", "F"],
-        "APSC 221" : ["Economic And Business Practice", "F"],
+        "APSC 221" : ["Economic And Business Practice", "W"],
         "CIVL 200" : ["Professional Skills I", "F"],
         "CIVL 210" : ["Chemistry For Civil Engineers", "F"],
-        "CIVL 215" : ["Materials For Civil Engineers", "F"],
-        "CIVL 222" : ["Numerical Methods", "F"],
+        "CIVL 215" : ["Materials For Civil Engineers", "W"],
+        "CIVL 222" : ["Numerical Methods", "W"],
         "CIVL 230" : ["Solid Mechanics I", "F"],
-        "CIVL 231" : ["Solid Mechanics II", "F"],
-        "CIVL 250" : ["Hydraulics I", "F"],
+        "CIVL 231" : ["Solid Mechanics II", "W"],
+        "CIVL 250" : ["Hydraulics I", "W"],
         "MTHE 224" : ["Applied Math For Civil Eng.", "F"]
     },
 

@@ -2,17 +2,16 @@
     "name": "Electrical Engineering",
 
     "common core courses": {
-        "APSC 200" : ["Engineering Design & Practice II", "F"],
-        "APSC 293" : ["Engineering Communications", "F"],
         "ELEC 221" : ["Electric Circuits", "F"],
-        "ELEC 224" : ["Continuous-Time Signals and Systems", "F"],
-        "ELEC 252" : ["Electronics I", "F"],
+        "ELEC 224" : ["Continuous-Time Signals and Systems", "W"],
+        "ELEC 252" : ["Electronics I", "W"],
         "ELEC 271" : ["Digital Systems", "F"],
-        "ELEC 274" : ["Computer Architecture", "F"],
+        "ELEC 274" : ["Computer Architecture", "W"],
         "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
-        "ELEC 280" : ["Fundamentals of Electromagnets", "F"],
-        "ELEC 299" : ["Mechatronics Project", "F"],
-        "MTHE 228" : ["Complex Analysis",  "F"]
+        "ELEC 280" : ["Fundamentals of Electromagnets", "W"],
+        "ELEC 290" : ["Electrical and Computer Engineering Design and Practice", "F"],
+        "ELEC 292" : ["Introduction to Data Science", "W"],
+        "MTHE 228" : ["Complex Analysis",  "W"]
     },
 
     "sub-plans": {

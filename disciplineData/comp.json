@@ -2,17 +2,16 @@
     "name": "Computer Engineering",
 
     "common core courses": {
-        "APSC 200" : ["Engineering Design & Practice II", "F"],
-        "APSC 293" : ["Engineering Communications", "F"],
         "ELEC 221" : ["Electric Circuits", "F"],
-        "ELEC 252" : ["Electronics I", "F"],
-        "ELEC 270" : ["Discrete Mathematics with Computer Engineering App", "F"],
+        "ELEC 252" : ["Electronics I", "W"],
+        "ELEC 270" : ["Discrete Mathematics with Computer Engineering App", "W"],
         "ELEC 271" : ["Digital Systems", "F"],
-        "ELEC 274" : ["Computer Architecture", "F"],
+        "ELEC 274" : ["Computer Architecture", "W"],
         "ELEC 278" : ["Fundamentals Of Information Structures", "F"],
-        "ELEC 279" : ["Introduction to Object Oriented Programming", "F"],
-        "ELEC 280" : ["Fundamentals of Electromagnets", "F"],
-        "ELEC 299" : ["Mechatronics Project", "F"]
+        "ELEC 279" : ["Introduction to Object Oriented Programming", "W"],
+        "ELEC 280" : ["Fundamentals of Electromagnets", "W"],
+        "ELEC 290" : ["Electrical and Computer Engineering Design and Practice", "F"],
+        "ELEC 292" : ["Introduction to Data Science", "W"]
     },
 
     "sub-plans": {
@@ -32,7 +31,7 @@
     "choices": [
         {
             "MTHE 225" : ["Ordinary Differential Equations", "F"],
-            "MTHE 237" : ["Differential Equations for Engineering Science", "F"]
+            "MTHE 235" : ["Diff Equations For Elec & Comp", "F"]
         }
     ]
 

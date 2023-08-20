@@ -2,16 +2,19 @@
     "name" : "Geological Engineering",
 
     "common core courses": {
-        "APSC 200" : ["Engineering Design & Practice II", "F"],
-        "APSC 293" : ["Engineering Communications", "F"],
-        "APSC 221" : ["Economic And Business Practice", "F"],
+        "APSC 200" : ["Engineering Design & Practice II", "W"],
+        "APSC 221" : ["Economic And Business Practice", "W"],
+        "APSC 293" : ["Engineering Communications", "W"],
         "CHEE 209" : ["Analysis Of Process Data", "F"],
         "CIVL 230" : ["Solid Mechanics I", "F"],
-        "CIVL 215" : ["Materials For Civil Engineers", "F"],
-        "CIVL 222" : ["Numerical Methods", "F"],
-        "CIVL 231" : ["Solid Mechanics II", "F"],
-        "CIVL 250" : ["Hydraulics I", "F"],
-        "MTHE 224" : ["Applied Math For Civil Eng.", "F"]
+        "GEOE 207" : ["History of Life", "F"],
+        "GEOE 221" : ["Geological Engineering Field Methods", "F"],
+        "GEOE 232" : ["Mineralogy", "F"],
+        "GEOE 235" : ["Gen & Char Solid Earth Mtls", "W"],
+        "GEOE 238" : ["Sedimentology Stratigraphy", "W"],
+        "GEOE 249" : ["Geophysical Char Of The Earth", "W"],
+        "GEOE 281" : ["Introduction to Geological Engineering", "F"],
+        "MTHE 225" : ["Ordinary Differential Equations", "W"]
     },
 
     "sub-plans": {
