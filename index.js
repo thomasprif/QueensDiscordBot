@@ -3,6 +3,7 @@ const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 const { UserSelectMenuBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 const { token } = require("./config.json");
+const config = require("./config.json");
 const { getCourses, getDisciplines, assignRole } = require("./tools.js");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -165,6 +166,23 @@ client.on(Events.InteractionCreate, async interaction => {
 // Modal Interraction
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
+  if(interaction.customID === "ChangeTermModal") {
+        const input = interaction.fields.fields.first().value;
+        switch(input) {
+            case "Fall":
+                config.currentSemester = "F";
+                break;
+            case "Winter":
+                config.currentSemester = "W";
+                break;
+            case "Summer":
+                config.currentSemester = "S";
+                break;
+            default:
+                return;
+        }
+    fs.writeFile("./config.json", JSON.stringify(config, null, 2)); // Write new config
+  } else if(interaction.customID === "ElectiveModal") {
     // Get user input
     const input = interaction.fields.fields.first().value;
     let prefix = input.match(/[a-zA-Z]{4}/);
@@ -186,6 +204,7 @@ client.on(Events.InteractionCreate, async interaction => {
     if (!courses[0]) return interaction.reply({content: `Error, cannot find course ${course}`, ephemeral: true});
     await assignRole(interaction.member, course);
     await interaction.reply({content: `Added to course ${course}`, ephemeral: true});
+  }
 });
 
 // Handle multiselect menus
@@ -208,4 +227,4 @@ client.on(Events.InteractionCreate, async interaction => {
     }
 })
 
-client.login(token);
+client.login(config.token);
